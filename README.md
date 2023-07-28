@@ -17,7 +17,6 @@ pip install .
 Usage
 Here's an example of how to use TGJU-API to retrieve currency data for the US dollar:
 ```
-python
 from tgju_api import CurrencyScraper
 
 scraper = CurrencyScraper()
