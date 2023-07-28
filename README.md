@@ -19,8 +19,7 @@ Clone the repository and import the package:
 ```
 git clone https://github.com/amirh0ss3in/tgju_api.git
 cd tgju_api
-python
-from tgju_api import CurrencyScraper
+python exammple.py
 ```
 
 ## Usage
