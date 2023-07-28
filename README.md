@@ -14,7 +14,7 @@ You can install the dependencies using pip:
 pip install beautifulsoup4 js2xml
 ```
 
-Clone the repo and import the package.
+Clone the repository and import the package.
 
 ## Usage
 Here's an example of how to use TGJU_API to retrieve currency data for the US dollar:
