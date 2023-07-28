@@ -1,0 +1,1 @@
+from tgju_api import CurrencyScraper
