@@ -16,12 +16,6 @@ pip install beautifulsoup4 js2xml
 
 Clone the repo and import the package.
 
-## Install using PIP [TODO] 
-[TODO] Alternatively, you can install TGJU-API using pip:
-```
-pip install tgju_api
-```
-
 ## Usage
 Here's an example of how to use TGJU_API to retrieve currency data for the US dollar:
 ```
