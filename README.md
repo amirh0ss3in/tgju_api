@@ -14,6 +14,8 @@ You can install the dependencies using pip:
 pip install beautifulsoup4 js2xml
 ```
 
+Clone the repo and import the package.
+
 ## Install using PIP [TODO] 
 [TODO] Alternatively, you can install TGJU-API using pip:
 ```
