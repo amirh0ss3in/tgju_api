@@ -16,7 +16,7 @@ pip install beautifulsoup4 js2xml
 ## Install from GitHub
 You can clone the repository from GitHub and install it manually:
 ```
-git clone https://github.com/your_username/tgju-api.git
+git clone https://github.com/amirh0ss3in/tgju_api.git
 cd tgju-api
 pip install .
 ```
