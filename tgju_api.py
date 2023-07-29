@@ -87,12 +87,20 @@ class CurrencyScraper:
         url: str = CurrencyScraper.source + CurrencyScraper.profile + CurrencyScraper.currencies_dict[currency]
 
         response = requests.get(url)
-        soup = BeautifulSoup(response.content, 'html.parser')
-        script = soup.find("script", string=re.compile("ChartBlock-3")).text
-        parsed = js2xml.parse(script)
-        data = [d.xpath(".//array/number/@value") for d in parsed.xpath("//property[@name='chartData']") if
-                len(d.xpath(".//array/number/@value")) > 0][0]
-        data = np.array(data, dtype=np.int64).reshape(-1, 2)
+
+        soup = BeautifulSoup(response.text, 'html.parser')
+        scripts = soup.find_all('script')
+
+        chart_data_pattern = re.compile(r'chartData:\s*(\[.*?\]])')
+
+        for script in scripts:
+            if script.string:
+                match = chart_data_pattern.findall(script.string)
+                if match:
+                    data = eval(match[2])
+        
+        data = np.array(data, dtype=np.int64)
+
         D = data[:, 0] // (24 * 3600 * 1000)
         data[:, 0] = D
         starting_day = pd.Timestamp('1970-01-01')
