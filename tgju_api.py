@@ -41,7 +41,8 @@ class CurrencyScraper:
 
     currencies_dict: Dict[str, str] = {'USD': 'price_dollar_rl',
                     'EUR': 'price_eur', 
-                    'AED': 'price_aed', 
+                    'AED': 'price_aed',
+                    'CNY': 'price_cny', 
                     'GBP': 'price_gbp', 
                     'TRY': 'price_try', 
                     'CHF': 'price_cny', 
