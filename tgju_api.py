@@ -117,7 +117,7 @@ class CurrencyScraper:
 
             resampled_df = df.resample('D').mean() 
             resampled_df = resampled_df.interpolate()
-            if not unix_timestamp:
+            if unix_timestamp:
                 resampled_df['unix_timestamp'] = resampled_df['unix_timestamp'].astype('int')
             resampled_df.reset_index(inplace=True)
             df.reset_index(inplace=True)
