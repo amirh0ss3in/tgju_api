@@ -1,5 +1,5 @@
 # TGJU-API
-TGJU-API is a Python web scraper for retrieving currency and gold prices from the tgju.org website. It uses the BeautifulSoup and js2xml libraries to parse the HTML and JavaScript on the website.
+TGJU-API is a Python web scraper for retrieving currency and gold prices from the tgju.org website. 
 
 # Installation
 
@@ -7,11 +7,10 @@ TGJU-API is a Python web scraper for retrieving currency and gold prices from th
 
 Before using TGJU-API, make sure you have the following dependencies installed:
 - BeautifulSoup
-- js2xml
 
 You can install the dependencies using pip:
 ```
-pip install beautifulsoup4 js2xml
+pip install beautifulsoup4
 ```
 
 Clone the repository and import the package:
@@ -30,7 +29,7 @@ import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 
 scraper = CurrencyScraper()
-currencies = scraper.currencies_dict
+currencies = scraper.currencies
 print(currencies)
 
 usd_data = scraper.scrape_currency('USD', unix_timestamp=False)
