@@ -30,7 +30,7 @@ import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 
 scraper = CurrencyScraper()
-currencies = scraper.currencies
+currencies = scraper.currencies_dict
 print(currencies)
 
 usd_data = scraper.scrape_currency('USD', unix_timestamp=False)
