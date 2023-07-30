@@ -3,7 +3,6 @@ import re
 import numpy as np
 import pandas as pd
 from bs4 import BeautifulSoup
-import js2xml
 from typing import List, Dict
 
 class CurrencyScraper:
