@@ -84,7 +84,7 @@ class CurrencyScraper:
     profile: str = 'profile/'
     
     @staticmethod
-    def scrape_currency(currency: str, unix_timestamp: bool = False) -> pd.DataFrame:
+    def scrape_currency(currency: str, unix_timestamp: bool = False, resample: bool = False) -> pd.DataFrame:
         url: str = CurrencyScraper.source + CurrencyScraper.profile + CurrencyScraper.currencies_dict[currency]
 
         response = requests.get(url)
@@ -98,8 +98,10 @@ class CurrencyScraper:
             if script.string:
                 match = chart_data_pattern.findall(script.string)
                 if match:
-                    data = eval(match[2])
-        
+                    if len(match) > 2:                  # Here I'm doing something stupid. Don't know how to fix it yet.
+                        data = eval(match[2])
+                    else:
+                        data = eval(match[0])
         data = np.array(data, dtype=np.int64)
 
         D = data[:, 0] // (24 * 3600 * 1000)
@@ -109,7 +111,20 @@ class CurrencyScraper:
         df['timestamp'] = starting_day + pd.to_timedelta(df['unix_timestamp'], unit='d')
         if not unix_timestamp:
             df.drop(columns=['unix_timestamp'], inplace=True)
+        
+        if resample:
+            df['timestamp'] = pd.to_datetime(df['timestamp'])
+            df = df.set_index('timestamp')
 
+            resampled_df = df.resample('D').mean() 
+            resampled_df = resampled_df.interpolate()
+            if not unix_timestamp:
+                resampled_df['unix_timestamp'] = resampled_df['unix_timestamp'].astype('int')
+            resampled_df.reset_index(inplace=True)
+            df.reset_index(inplace=True)
+            assert len(resampled_df) == (df['timestamp'].max() - df['timestamp'].min()).days + 1 , "Resampled dataframe has incorrect length. Sorry. Probably a bug. Please report this bug at https://github.com/amirh0ss3in/tgju_api/issues"
+            return resampled_df
+        
         return df
-    
+
 
