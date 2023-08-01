@@ -83,7 +83,7 @@ class CurrencyScraper:
     profile: str = 'profile/'
     
     @staticmethod
-    def scrape_currency(currency: str, unix_timestamp: bool = False, resample: bool = False) -> pd.DataFrame:
+    def scrape_currency(currency: str, unix_timestamp: bool = False, resample: bool = False, jalali: bool = False) -> pd.DataFrame:
         url: str = CurrencyScraper.source + CurrencyScraper.profile + CurrencyScraper.currencies_dict[currency]
 
         response = requests.get(url)
@@ -122,8 +122,16 @@ class CurrencyScraper:
             resampled_df.reset_index(inplace=True)
             df.reset_index(inplace=True)
             assert len(resampled_df) == (df['timestamp'].max() - df['timestamp'].min()).days + 1 , "Resampled dataframe has incorrect length. Sorry. Probably a bug. Please report this bug at https://github.com/amirh0ss3in/tgju_api/issues"
-            return resampled_df
+            del df
+            df = resampled_df
         
+        if jalali:
+            df['jalali_timestamp'] = df['timestamp'].apply(CurrencyScraper.to_jalali_date)
+
         return df
 
-
+    @staticmethod    
+    def to_jalali_date(dt):
+        from jdatetime import date as jdate
+        j = jdate.fromgregorian(date=dt.date())
+        return f"{j.year}/{j.month}/{j.day}"
