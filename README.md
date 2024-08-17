@@ -7,10 +7,11 @@ TGJU-API is a Python web scraper for retrieving currency and gold prices from th
 
 Before using TGJU-API, make sure you have the following dependencies installed:
 - BeautifulSoup
+- jdatetime (optional)
 
 You can install the dependencies using pip:
 ```
-pip install beautifulsoup4
+pip install beautifulsoup4 jdatetime
 ```
 
 Clone the repository and import the package:
